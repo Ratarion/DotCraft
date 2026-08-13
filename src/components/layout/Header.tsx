@@ -1,8 +1,9 @@
 import { Link, NavLink } from 'react-router-dom';
 
 const navItems = [
-  { to: '/', label: 'Главная' },
   { to: '/catalog', label: 'Каталог' },
+  { to: '/about', label: 'О компании'},
+  { to: '/contact', label: 'Контакты'},
   { to: '/menu', label: 'Меню' },
 ];
 
