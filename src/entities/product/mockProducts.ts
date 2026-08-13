@@ -3,10 +3,10 @@ import type { Product } from '@/types/product';
 export const mockProducts: Product[] = [
   {
     id: 'p1',
-    title: 'Сообщество в ВК',
+    title: 'Сообщество в ВК (Бизнес)',
     price: 890,
     currency: 'RUB',
-    image: '',
+    image: '/src/assets/img/product/vk(business).jpg',
     category: 'Сообщества',
     description: 'Создания сообщества в ВК под заказ',
     inStock: true,
@@ -23,12 +23,12 @@ export const mockProducts: Product[] = [
   },
   {
     id: 'p3',
-    title: 'Деревянная разделочная доска',
+    title: 'Сайт-визитка',
     price: 1650,
     currency: 'RUB',
-    image: '',
-    category: 'Кухня',
-    description: 'Доска из массива дуба.',
+    image: '/src/assets/img/product/site-card.jpg',
+    category: 'Сайт',
+    description: 'Одностраничный сайт о чем пожелаете',
     inStock: false,
   },
 ];

@@ -20,8 +20,15 @@ export function ProductPage() {
 
   return (
     <section className="grid grid-cols-1 gap-10 md:grid-cols-2">
-      <div className="aspect-square rounded-lg bg-[var(--color-accent-soft)]" />
-
+      <div className="aspect-square rounded-lg bg-[var(--color-accent-soft)]">
+              {product.image && (
+                  <img
+                  src={product.image}
+                  alt={product.title}
+                  className='h-full w-full object-cover'
+                  />
+                )}
+            </div>
       <div>
         <h1 className="font-[var(--font-display)] text-3xl font-semibold">
           {product.title}
@@ -35,7 +42,7 @@ export function ProductPage() {
         </p>
 
         <Button className="mt-6" disabled={!product.inStock}>
-          {product.inStock ? 'Добавить в корзину' : 'Нет в наличии'}
+          {product.inStock ? 'Добавить в корзину' : 'Сейчас не можем'}
         </Button>
       </div>
     </section>

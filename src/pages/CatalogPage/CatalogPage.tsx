@@ -35,7 +35,7 @@ export function CatalogPage() {
               {formatPrice(product.price, product.currency)}
             </p>
             <Button className="mt-6" disabled={!product.inStock}>
-              {product.inStock ? 'Добавить в корзину' : 'Нет в наличии'}
+              {product.inStock ? 'Добавить в корзину' : 'Сейчас не можем'}
             </Button>
           </Link>
         ))}
