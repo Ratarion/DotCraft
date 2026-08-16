@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useCart } from '@/hooks/useCart';
 
@@ -9,48 +9,76 @@ const navItems = [
   { to: '/contacts', label: 'Контакты' },
 ];
 
-const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
-  `rounded-sm text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] ${
-    isActive
-      ? 'font-medium text-[var(--color-accent)]'
-      : 'text-[var(--color-ink)]/70 hover:text-[var(--color-ink)]'
-  }`;
-
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { totalCount } = useCart();
   const location = useLocation();
+  const navRef = useRef<HTMLDivElement>(null);
+  const pillRef = useRef<HTMLDivElement>(null);
+  const btnRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
+  // Закрываем мобильное меню при смене страницы
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
 
+  // Двигаем активную капсулу
+  useEffect(() => {
+    const activeIndex = navItems.findIndex((item) =>
+      location.pathname.startsWith(item.to)
+    );
+
+    const activeBtn = btnRefs.current[activeIndex];
+    const pill = pillRef.current;
+
+    if (activeBtn && pill) {
+      pill.style.width = `${activeBtn.offsetWidth}px`;
+      pill.style.transform = `translateX(${activeBtn.offsetLeft}px)`;
+    } else if (pill) {
+      // Если нет активного пункта — прячем капсулу
+      pill.style.width = '0px';
+    }
+  }, [location.pathname]);
+
   return (
-    <header className="sticky top-0 z-10 border-b border-[var(--color-line)] bg-[var(--color-paper)]/85 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
+    <header className="sticky top-0 z-50 border-b border-[var(--color-line)]/60 bg-[var(--color-paper)]/70 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+        {/* Logo */}
         <Link
           to="/"
           className="flex items-center gap-2.5 rounded-sm font-[var(--font-display)] text-xl font-semibold tracking-tight focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
         >
-          <img
-            src="/logo.svg"
-            alt="Dot&Craft"
-            className="h-8 w-auto"
-          />
+          <img src="/logo.svg" alt="Dot&Craft" className="h-8 w-auto" />
           <span>Dot&Craft</span>
         </Link>
 
+        {/* Desktop Liquid Glass Nav */}
         <nav
-          className="hidden items-center gap-6 sm:flex"
+          className="hidden sm:block"
           aria-label="Основная навигация"
         >
-          {navItems.map((item) => (
-            <NavLink key={item.to} to={item.to} className={navLinkClasses}>
-              {item.label}
-            </NavLink>
-          ))}
+          <div className="liquid-nav" ref={navRef}>
+            <div className="nav-items">
+              <div className="active-pill" ref={pillRef} />
+              {navItems.map((item, i) => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  ref={(el) => {
+                    btnRefs.current[i] = el;
+                  }}
+                  className={({ isActive }) =>
+                    `nav-btn ${isActive ? 'active' : ''}`
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+            </div>
+          </div>
         </nav>
 
+        {/* Right side */}
         <div className="flex items-center gap-2">
           <CartLink totalCount={totalCount} className="hidden sm:inline-flex" />
 
@@ -67,15 +95,26 @@ export function Header() {
         </div>
       </div>
 
+      {/* Mobile menu */}
       {isMenuOpen && (
         <nav
           id="mobile-nav"
           aria-label="Мобильная навигация"
           className="border-t border-[var(--color-line)] px-4 py-4 sm:hidden"
         >
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             {navItems.map((item) => (
-              <NavLink key={item.to} to={item.to} className={navLinkClasses}>
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className={({ isActive }) =>
+                  `rounded-lg px-3 py-2 text-sm transition-colors ${
+                    isActive
+                      ? 'bg-[var(--color-accent)]/15 font-medium text-[var(--color-accent)]'
+                      : 'text-[var(--color-ink)]/70 hover:text-[var(--color-ink)]'
+                  }`
+                }
+              >
                 {item.label}
               </NavLink>
             ))}
@@ -97,7 +136,7 @@ function CartLink({
   return (
     <Link
       to="/cart"
-      className={`inline-flex items-center gap-2 rounded-md border border-[var(--color-line)] px-3 py-1.5 text-sm transition-colors hover:border-[var(--color-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] ${className}`}
+      className={`inline-flex items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-surface)]/60 px-3.5 py-1.5 text-sm backdrop-blur-md transition-colors hover:border-[var(--color-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] ${className}`}
     >
       Корзина
       {totalCount > 0 && (

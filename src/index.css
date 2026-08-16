@@ -1,50 +1,147 @@
 @import "tailwindcss";
 
 @theme {
-  /* Cosmic dark theme — easy on the eyes */
-  --color-ink: #E8E4F0;           /* soft light text */
-  --color-paper: #0B0A12;         /* deep space black */
-  --color-surface: #14121F;       /* elevated surfaces / cards */
-  --color-accent: #8B6CFF;        /* soft vibrant purple */
-  --color-accent-soft: #1E1833;   /* dark purple tint */
-  --color-line: #2A2540;          /* subtle borders */
-  --color-muted: #A89BC8;         /* secondary text */
+  /* Cosmic dark theme */
+  --color-ink: #E8E4F0;
+  --color-paper: #0B0A12;
+  --color-surface: #14121F;
+  --color-accent: #8B6CFF;
+  --color-accent-soft: #1E1833;
+  --color-line: #2A2540;
+  --color-muted: #A89BC8;
 
   --font-display: "Fraunces", ui-serif, Georgia, serif;
   --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-accent: "Syne", ui-sans-serif, system-ui, sans-serif;
+
+  --glass-bg: rgba(20, 18, 31, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-highlight: rgba(255, 255, 255, 0.18);
+  --glass-caustic: rgba(255, 255, 255, 0.04);
+  --pill-bg: rgba(139, 108, 255, 0.22);
+  --pill-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  --nav-text: rgba(232, 228, 240, 0.65);
+  --nav-text-active: #E8E4F0;
 }
 
+/* ─── Base ─────────────────────────────────────────────── */
 body {
   font-family: var(--font-body);
   background-color: var(--color-paper);
   color: var(--color-ink);
+  /* Soft cosmic glow + subtle star-like noise via layered gradients */
   background-image:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139, 108, 255, 0.12), transparent),
-    radial-gradient(ellipse 60% 40% at 90% 10%, rgba(99, 70, 200, 0.06), transparent);
+    radial-gradient(ellipse 90% 50% at 50% -15%, rgba(139, 108, 255, 0.14), transparent),
+    radial-gradient(ellipse 50% 35% at 95% 5%, rgba(99, 70, 200, 0.07), transparent),
+    radial-gradient(1.5px 1.5px at 20% 30%, rgba(232, 228, 240, 0.12), transparent),
+    radial-gradient(1px 1px at 70% 60%, rgba(232, 228, 240, 0.08), transparent),
+    radial-gradient(1.2px 1.2px at 40% 80%, rgba(139, 108, 255, 0.15), transparent);
   background-attachment: fixed;
 }
 
 ::selection {
-  background-color: rgba(139, 108, 255, 0.35);
+  background-color: rgba(139, 108, 255, 0.4);
   color: #fff;
 }
 
-/* Soft scrollbar for dark theme */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--color-paper);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-line);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent);
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--color-paper); }
+::-webkit-scrollbar-thumb { background: var(--color-line); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
+
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ─── Typography utilities ─────────────────────────────── */
+.font-accent {
+  font-family: var(--font-accent);
+  font-weight: 700;
+  letter-spacing: -0.03em;
 }
 
+.heading-hero {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #E8E4F0 0%, #8B6CFF 50%, #C4B5FD 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Decorative large numbers (01, 02…) */
+.decor-num {
+  font-family: var(--font-accent);
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -0.06em;
+  color: var(--color-accent);
+  opacity: 0.12;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ─── Motion ───────────────────────────────────────────── */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes soft-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.reveal {
+  animation: reveal-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ─── Card clip (skewed bottom edge) ───────────────────── */
+.card-clip {
+  clip-path: polygon(0 0, 100% 0, 100% 93%, 94% 100%, 0 100%);
+}
+
+/* ─── Dashed divider with dots ─────────────────────────── */
+.divider-dots {
+  border: none;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--color-line) 15%,
+    var(--color-line) 85%,
+    transparent 100%
+  );
+  position: relative;
+}
+
+.divider-dots::before,
+.divider-dots::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  opacity: 0.5;
+  transform: translateY(-50%);
+}
+.divider-dots::before { left: 12%; }
+.divider-dots::after { right: 12%; }
+
+/* ─── Reduced motion ──────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -54,4 +151,78 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+.liquid-nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  border-radius: 9999px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  box-shadow:
+    0 20px 40px -12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px var(--glass-highlight),
+    inset 0 -1px 2px var(--glass-caustic),
+    inset 0 0 0 1px var(--glass-border);
+  z-index: 2;
+  
+}
+
+.liquid-nav::before {
+  content: '';
+  position: absolute;
+  inset: 1px 1px auto;
+  height: 45%;
+  border-radius: 9999px 9999px 40% 40%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.nav-items {
+  position: relative;
+  display: flex;
+  gap: 2px;
+  z-index: 2;
+}
+
+.active-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 40px;
+  background: var(--pill-bg);
+  border-radius: 9999px;
+  box-shadow: var(--pill-shadow);
+  transition: transform 0.45s cubic-bezier(0.34, 1.25, 0.64, 1),
+              width 0.45s cubic-bezier(0.34, 1.25, 0.64, 1);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.nav-btn {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--nav-text);
+  text-decoration: none;
+  transition: color 0.25s ease;
+  white-space: nowrap;
+}
+
+.nav-btn:hover {
+  color: var(--nav-text-active);
+}
+
+.nav-btn.active {
+  color: var(--nav-text-active);
 }

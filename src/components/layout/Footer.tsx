@@ -52,7 +52,7 @@ export function Footer() {
             </li>
             <li>
               <Link
-                to="/abou"
+                to="/about"
                 className="rounded-sm hover:text-[var(--color-ink)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
               >
                 О компании
