@@ -28,7 +28,8 @@ export function CategoriesBlock() {
             <Link
               key={category}
               to={`/catalog?category=${encodeURIComponent(category)}`}
-              className="flex flex-col gap-1 rounded-lg border border-[var(--color-line)] p-4 transition-colors hover:border-[var(--color-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+              className="flex flex-col gap-1 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)]/50 p-4 transition-all duration-300 hover:border-[var(--color-accent)] hover:shadow-[0_0_20px_rgba(139,108,255,0.1)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+
             >
               <span className="font-medium">{category}</span>
               <span className="text-sm text-[var(--color-ink)]/60">

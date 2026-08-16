@@ -1,11 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #1a1a1a;
-  --color-paper: #faf9f6;
-  --color-accent: #2f5233;
-  --color-accent-soft: #e8efe9;
-  --color-line: #e5e2da;
+  /* Cosmic dark theme — easy on the eyes */
+  --color-ink: #E8E4F0;           /* soft light text */
+  --color-paper: #0B0A12;         /* deep space black */
+  --color-surface: #14121F;       /* elevated surfaces / cards */
+  --color-accent: #8B6CFF;        /* soft vibrant purple */
+  --color-accent-soft: #1E1833;   /* dark purple tint */
+  --color-line: #2A2540;          /* subtle borders */
+  --color-muted: #A89BC8;         /* secondary text */
 
   --font-display: "Fraunces", ui-serif, Georgia, serif;
   --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -15,11 +18,31 @@ body {
   font-family: var(--font-body);
   background-color: var(--color-paper);
   color: var(--color-ink);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139, 108, 255, 0.12), transparent),
+    radial-gradient(ellipse 60% 40% at 90% 10%, rgba(99, 70, 200, 0.06), transparent);
+  background-attachment: fixed;
 }
 
 ::selection {
-  background-color: var(--color-accent-soft);
-  color: var(--color-ink);
+  background-color: rgba(139, 108, 255, 0.35);
+  color: #fff;
+}
+
+/* Soft scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-paper);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-line);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -14,10 +14,18 @@ export function ProductArt({ variant, className = '' }: ProductArtProps) {
       aria-label={artLabels[variant]}
     >
       <rect width="400" height="400" fill="var(--color-accent-soft)" />
+      <rect width="400" height="400" fill="url(#artGlow)" opacity="0.5" />
+      <defs>
+        <radialGradient id="artGlow" cx="50%" cy="40%" r="65%">
+          <stop offset="0%" stopColor="var(--color-accent)" stopOpacity="0.2" />
+          <stop offset="100%" stopColor="transparent" stopOpacity="0" />
+        </radialGradient>
+      </defs>
       {artByVariant[variant]}
     </svg>
   );
 }
+
 
 const artLabels: Record<ProductArtVariant, string> = {
   community: 'Иллюстрация: оформление сообщества',
@@ -45,18 +53,19 @@ const artByVariant: Record<ProductArtVariant, React.ReactNode> = {
         width="128"
         height="92"
         rx="20"
-        fill="var(--color-paper)"
+        fill="var(--color-surface)"
         stroke="var(--color-ink)"
         strokeWidth="4"
       />
       <path
         d="M280 280 L280 306 L250 280"
-        fill="var(--color-paper)"
+        fill="var(--color-surface)"
         stroke="var(--color-ink)"
         strokeWidth="4"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
+
       <circle cx="132" cy="184" r="8" fill="var(--color-ink)" />
       <circle cx="164" cy="184" r="8" fill="var(--color-ink)" />
       <circle cx="238" cy="234" r="10" fill="var(--color-accent)" />

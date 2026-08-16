@@ -92,7 +92,8 @@ function Field({
         type={type}
         autoComplete={autoComplete}
         required={required}
-        className="rounded-md border border-[var(--color-line)] bg-[var(--color-paper)] px-3 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+        className="rounded-md border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2 text-[var(--color-ink)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+
       />
     </label>
   );

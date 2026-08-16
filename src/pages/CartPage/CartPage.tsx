@@ -59,7 +59,8 @@ export function CartPage() {
                         onChange={(event) =>
                           setQuantity(item.product.id, Number(event.target.value) || 1)
                         }
-                        className="w-16 rounded-md border border-[var(--color-line)] bg-[var(--color-paper)] px-2 py-1 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+                        className="w-16 rounded-md border border-[var(--color-line)] bg-[var(--color-surface)] px-2 py-1 text-sm text-[var(--color-ink)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+
                       />
                     </label>
 
@@ -76,7 +77,8 @@ export function CartPage() {
             ))}
           </ul>
 
-          <aside className="w-full shrink-0 rounded-lg border border-[var(--color-line)] p-5 lg:w-72">
+          <aside className="w-full shrink-0 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)]/70 p-5 lg:w-72">
+
             <div className="flex items-center justify-between">
               <span className="text-[var(--color-ink)]/70">Итого</span>
               <span className="text-xl font-medium">{formatPrice(totalPrice)}</span>

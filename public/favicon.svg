@@ -1,4 +1,47 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-  <rect width="48" height="48" rx="10" fill="#2f5233"/>
-  <circle cx="24" cy="24" r="9" fill="#faf9f6"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <radialGradient id="planetGrad" cx="38%" cy="32%" r="62%" fx="32%" fy="28%">
+      <stop offset="0%" stop-color="#A78BFA"/>
+      <stop offset="20%" stop-color="#8B5CF6"/>
+      <stop offset="50%" stop-color="#6D28D9"/>
+      <stop offset="75%" stop-color="#4C1D95"/>
+      <stop offset="100%" stop-color="#2E1065"/>
+    </radialGradient>
+    
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="0.8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- STAR -->
+  <g transform="translate(5.5, 5)" filter="url(#glow)">
+    <path d="M0,-6.5 L1.2,-1.2 6.5,0 1.2,1.2 0,6.5 -1.2,1.2 -6.5,0 -1.2,-1.2 Z" fill="#FFFFFF"/>
+    <path d="M0,-3.2 L0.6,-0.6 3.2,0 0.6,0.6 0,3.2 -0.6,0.6 -3.2,0 -0.6,-0.6 Z" fill="#FFFFFF"/>
+  </g>
+
+  <!-- RING (back) -->
+  <ellipse cx="17.5" cy="17" rx="11.5" ry="3.1" 
+           fill="none" 
+           stroke="#FFFFFF" 
+           stroke-width="1.4"
+           transform="rotate(-24 17.5 17)"/>
+
+  <!-- PLANET -->
+  <circle cx="17.5" cy="17" r="7.8" fill="url(#planetGrad)"/>
+  
+  <!-- Soft highlight -->
+  <ellipse cx="15" cy="13.8" rx="3.6" ry="2.5" fill="#DDD6FE" opacity="0.22"/>
+
+  <!-- RING (front) -->
+  <g transform="rotate(-24 17.5 17)">
+    <path d="M 6,17 A 11.5 3.1 0 0 1 29,17" 
+          fill="none" 
+          stroke="#FFFFFF" 
+          stroke-width="1.5"
+          stroke-linecap="butt"/>
+  </g>
 </svg>

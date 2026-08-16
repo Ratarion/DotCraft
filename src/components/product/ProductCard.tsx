@@ -10,11 +10,12 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   return (
-    <article className="group flex flex-col overflow-hidden rounded-lg border border-[var(--color-line)] bg-white/40 transition-colors focus-within:border-[var(--color-accent)] hover:border-[var(--color-accent)]">
+    <article className="group flex flex-col overflow-hidden rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)]/80 backdrop-blur-sm transition-all duration-300 focus-within:border-[var(--color-accent)] hover:border-[var(--color-accent)] hover:shadow-[0_0_24px_rgba(139,108,255,0.12)]">
       <Link
         to={`/product/${product.id}`}
-        className="block aspect-[4/3] overflow-hidden rounded-t-lg focus:outline-none"
+        className="block aspect-[4/3] overflow-hidden rounded-t-xl focus:outline-none"
       >
+
         <ProductArt
           variant={product.art}
           className="h-full w-full transition-transform duration-300 group-hover:scale-105"

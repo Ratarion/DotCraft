@@ -13,7 +13,7 @@ export function Banner() {
         </h1>
         <p className="max-w-md text-[var(--color-ink)]/70">
           Оформляем сообщества, собираем сайты, выстраиваем бренд и помогаем
-          расти в поиске — небольшими, аккуратно сделанными заказами.
+          расти в поиске — небольшими и аккуратно сделанными заказами.
         </p>
         <Link to="/catalog">
           <Button>Перейти в каталог</Button>
@@ -44,16 +44,28 @@ function BannerArt({ className = '' }: { className?: string }) {
       role="img"
       aria-label="Абстрактная композиция из точек, символизирующая бренд Dot&Craft"
     >
+      <defs>
+        <radialGradient id="bannerGlow" cx="40%" cy="35%" r="60%">
+          <stop offset="0%" stopColor="var(--color-accent)" stopOpacity="0.22" />
+          <stop offset="100%" stopColor="transparent" stopOpacity="0" />
+        </radialGradient>
+      </defs>
       <rect
         width="340"
         height="280"
         rx="24"
         fill="var(--color-accent-soft)"
       />
+      <rect
+        width="340"
+        height="280"
+        rx="24"
+        fill="url(#bannerGlow)"
+      />
       <path
         d="M90 90 L190 60 M190 60 L250 140 M250 140 L150 170 M150 170 L60 200 M150 170 L220 230 M250 140 L300 220"
         stroke="var(--color-ink)"
-        strokeOpacity="0.25"
+        strokeOpacity="0.2"
         strokeWidth="1.5"
         fill="none"
       />
@@ -64,9 +76,10 @@ function BannerArt({ className = '' }: { className?: string }) {
           cy={dot.cy}
           r={dot.r}
           fill={dot.fill}
-          opacity={dot.fill === 'var(--color-accent)' ? 0.9 : 1}
+          opacity={dot.fill === 'var(--color-accent)' ? 0.95 : 0.85}
         />
       ))}
     </svg>
   );
 }
+

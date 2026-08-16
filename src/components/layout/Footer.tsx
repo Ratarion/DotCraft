@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 
 export function Footer() {
   return (
-    <footer className="border-t border-[var(--color-line)] bg-[var(--color-accent-soft)]/40">
+    <footer className="border-t border-[var(--color-line)] bg-[var(--color-surface)]/60">
+
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-10 sm:grid-cols-3">
         <div>
           <p className="font-[var(--font-display)] text-lg font-semibold tracking-tight">

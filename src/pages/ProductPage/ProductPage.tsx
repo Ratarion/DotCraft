@@ -31,9 +31,10 @@ export function ProductPage() {
       </Link>
 
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-        <div className="overflow-hidden rounded-lg">
+        <div className="overflow-hidden rounded-xl border border-[var(--color-line)]">
           <ProductArt variant={product.art} className="h-full w-full" />
         </div>
+
 
         <div>
           <p className="text-xs uppercase tracking-wide text-[var(--color-accent)]">

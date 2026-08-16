@@ -16,19 +16,23 @@ export function Header() {
   const { totalCount } = useCart();
   const location = useLocation();
 
-  // Close the mobile menu whenever the route changes.
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
 
   return (
-    <header className="sticky top-0 z-10 border-b border-[var(--color-line)] bg-[var(--color-paper)]">
+    <header className="sticky top-0 z-10 border-b border-[var(--color-line)] bg-[var(--color-paper)]/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
         <Link
           to="/"
-          className="rounded-sm font-[var(--font-display)] text-xl font-semibold tracking-tight focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+          className="flex items-center gap-2.5 rounded-sm font-[var(--font-display)] text-xl font-semibold tracking-tight focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
         >
-          Dot&Craft
+          <img
+            src="/logo.jpg"
+            alt="Dot&Craft"
+            className="h-8 w-auto"
+          />
+          <span>Dot&Craft</span>
         </Link>
 
         <nav
