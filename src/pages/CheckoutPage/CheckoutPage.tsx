@@ -4,11 +4,6 @@ import { Button } from '@/components/ui/Button';
 import { useCart } from '@/hooks/useCart';
 import { formatPrice } from '@/lib/format';
 
-/**
- * Not part of the assignment's 3 required pages — kept as a light demo
- * screen so the "Оформить заказ" flow from the cart doesn't dead-end.
- * No backend, so submitting just clears the cart and shows a confirmation.
- */
 export function CheckoutPage() {
   const { items, totalPrice, clear } = useCart();
   const [isSubmitted, setIsSubmitted] = useState(false);

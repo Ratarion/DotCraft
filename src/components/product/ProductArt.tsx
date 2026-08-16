@@ -5,13 +5,6 @@ interface ProductArtProps {
   className?: string;
 }
 
-/**
- * Brand-consistent product illustrations.
- *
- * The shop doesn't sell physical goods, so real product photos don't apply —
- * each service gets a small line-art icon instead. Every icon carries one
- * filled "dot" accent, a quiet nod to the "Dot&Craft" name.
- */
 export function ProductArt({ variant, className = '' }: ProductArtProps) {
   return (
     <svg
