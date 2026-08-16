@@ -3,6 +3,9 @@ import { useSearchParams } from 'react-router-dom';
 import { ProductCard } from '@/components/product/ProductCard';
 import { mockProducts, productCategories } from '@/entities/product/mockProducts';
 import type { ProductCategory } from '@/types/product';
+import { ScrollReveal } from '@/components/ui/ScrollReveal';
+
+
 
 type SortOption = 'default' | 'price-asc' | 'price-desc';
 
@@ -46,6 +49,7 @@ export function CatalogPage() {
 
   return (
     <section>
+      <ScrollReveal className="w-full" >
       <h1 className="mb-6 font-[var(--font-display)] text-2xl font-semibold">
         Каталог
       </h1>
@@ -79,11 +83,14 @@ export function CatalogPage() {
         </p>
       ) : (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+          {products.map((product, index) => (
+            <ScrollReveal key={product.id} delay={index * 0.1}>
+              <ProductCard product={product} />
+            </ScrollReveal>
           ))}
         </div>
       )}
+      </ScrollReveal>
     </section>
   );
 }
