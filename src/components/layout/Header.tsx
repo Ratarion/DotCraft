@@ -17,12 +17,10 @@ export function Header() {
   const pillRef = useRef<HTMLDivElement>(null);
   const btnRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
-  // Закрываем мобильное меню при смене страницы
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
 
-  // Двигаем активную капсулу
   useEffect(() => {
     const activeIndex = navItems.findIndex((item) =>
       location.pathname.startsWith(item.to)
@@ -35,7 +33,6 @@ export function Header() {
       pill.style.width = `${activeBtn.offsetWidth}px`;
       pill.style.transform = `translateX(${activeBtn.offsetLeft}px)`;
     } else if (pill) {
-      // Если нет активного пункта — прячем капсулу
       pill.style.width = '0px';
     }
   }, [location.pathname]);
@@ -43,7 +40,6 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--color-line)]/60 bg-[var(--color-paper)]/70 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-        {/* Logo */}
         <Link
           to="/"
           className="flex items-center gap-2.5 rounded-sm font-[var(--font-display)] text-xl font-semibold tracking-tight focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
@@ -52,9 +48,9 @@ export function Header() {
           <span>Dot&Craft</span>
         </Link>
 
-        {/* Desktop Liquid Glass Nav */}
+        {/* Полное меню — только настоящий десктоп (>=1024px) */}
         <nav
-          className="hidden sm:block"
+          className="hidden lg:block"
           aria-label="Основная навигация"
         >
           <div className="liquid-nav" ref={navRef}>
@@ -78,13 +74,12 @@ export function Header() {
           </div>
         </nav>
 
-        {/* Right side */}
         <div className="flex items-center gap-2">
-          <CartLink totalCount={totalCount} className="hidden sm:inline-flex" />
+          <CartLink totalCount={totalCount} className="hidden lg:inline-flex" />
 
           <button
             type="button"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-[var(--color-line)] text-[var(--color-ink)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] sm:hidden"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-[var(--color-line)] text-[var(--color-ink)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] lg:hidden"
             aria-expanded={isMenuOpen}
             aria-controls="mobile-nav"
             aria-label={isMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
@@ -95,12 +90,12 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Мобильное/планшетное меню — до 1024px */}
       {isMenuOpen && (
         <nav
           id="mobile-nav"
           aria-label="Мобильная навигация"
-          className="border-t border-[var(--color-line)] px-4 py-4 sm:hidden"
+          className="border-t border-[var(--color-line)] px-4 py-4 lg:hidden"
         >
           <div className="flex flex-col gap-3">
             {navItems.map((item) => (
