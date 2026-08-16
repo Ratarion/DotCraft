@@ -1,15 +1,21 @@
-Clone the repository
+Клонирование репозитория
 
 ```bash
 git clone https://github.com/Ratation/DotCraft.git
 cd DotCraft
+```
 
-Installing dependencies
+Установка зависимостей
+
+```bash
 npm install
 npm run dev
-
-Server launch
-npm run dev
-
-Open http://localhost:5173 in your browser.
 ```
+
+Запуск сервера
+
+```bash
+npm run dev
+```
+
+Откройте http://localhost:5173 в вашем браузере.
