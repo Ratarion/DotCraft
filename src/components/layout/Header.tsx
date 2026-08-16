@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useCart } from '@/hooks/useCart';
 
-const navItems = [{ to: '/catalog', label: 'Каталог' }];
+const navItems = [
+  { to: '/catalog', label: 'Каталог' },
+  { to: '/blog', label: 'Блог' },
+  { to: '/about', label: 'О компании' },
+  { to: '/contacts', label: 'Контакты' },
+];
 
 const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
   `rounded-sm text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] ${
