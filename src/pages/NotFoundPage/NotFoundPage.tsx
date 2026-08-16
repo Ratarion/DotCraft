@@ -1,5 +1,9 @@
+// ================================================
+// NotFoundPage.tsx — ЭПИЧНАЯ 404 С ТЕКСТ-ГЛОУ (твой оригинал + жидкий космос)
+// ================================================
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export function NotFoundPage() {
   const [mounted, setMounted] = useState(false);
@@ -9,63 +13,56 @@ export function NotFoundPage() {
   }, []);
 
   return (
-    <div className="relative min-h-[70vh] flex flex-col items-center justify-center overflow-hidden px-4 py-16 sm:py-24">
-      {/* Background glow */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-1/3 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-accent)]/20 blur-[120px]" />
-        <div className="absolute bottom-0 right-0 h-64 w-64 rounded-full bg-purple-900/30 blur-[100px]" />
+    <div className="relative min-h-screen w-full max-w-[100vw] bg-[var(--color-paper)] flex flex-col items-center justify-center overflow-hidden">
+      {/* Космический фон с blob'ами — свой overflow-hidden, чтобы блобы
+          никогда не создавали горизонтальный скролл на маленьких экранах */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute left-1/2 top-1/4 h-[380px] w-[380px] sm:h-[600px] sm:w-[600px] -translate-x-1/2 -translate-y-1/2 bg-[var(--color-accent)]/20 rounded-full blur-[100px] sm:blur-[140px]" />
+        <div className="absolute bottom-0 right-0 h-[300px] w-[300px] sm:h-[500px] sm:w-[500px] translate-x-1/4 translate-y-1/4 bg-[var(--color-ink)]/10 rounded-full blur-[90px] sm:blur-[120px]" />
+        <div className="absolute top-0 left-0 h-[240px] w-[240px] sm:h-[400px] sm:w-[400px] -translate-x-1/4 -translate-y-1/4 bg-[var(--color-accent)]/10 rounded-full blur-[80px] sm:blur-[100px]" />
       </div>
 
-      {/* Content */}
-      <div
-        className={`relative z-10 flex flex-col items-center text-center transition-all duration-700 ${
-          mounted ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
-        }`}
+      <motion.div
+        initial={{ opacity: 0, y: 60 }}
+        animate={{ opacity: mounted ? 1 : 0, y: mounted ? 0 : 60 }}
+        transition={{ duration: 1, ease: [0.34, 1.25, 0.64, 1] }}
+        className="relative z-10 w-full text-center px-6"
       >
-        {/* Small label */}
-        <p className="mb-4 text-sm font-medium tracking-[0.2em] text-[var(--color-accent)] uppercase">
-          Ошибка 404
-        </p>
+        {/* Заголовок ошибки */}
+        <p className="uppercase tracking-[8px] text-[var(--color-accent)] text-sm font-medium mb-6">Страница не найдена</p>
 
-        {/* Giant 404 */}
-        <h1
-          className="select-none font-[var(--font-display)] text-[100px] font-black leading-none tracking-tighter text-white sm:text-[140px] md:text-[180px]"
+        {/* 404 с glow */}
+        <motion.h1
+          className="select-none text-[88px] sm:text-[180px] font-black leading-none text-white tracking-[-4px] sm:tracking-[-12px]"
           style={{
-            textShadow:
-              '0 0 80px rgba(168, 85, 247, 0.35), 0 0 160px rgba(168, 85, 247, 0.15)',
+            textShadow: '0 0 100px rgba(139,108,255,0.6), 0 0 220px rgba(168,85,247,0.3)',
           }}
         >
           404
-        </h1>
+        </motion.h1>
 
-        {/* Message */}
-        <div className="mt-6 max-w-md space-y-2">
-          <p className="font-[var(--font-display)] text-xl font-semibold text-white sm:text-2xl">
-            Страница не найдена
-          </p>
-          <p className="text-[var(--color-ink)]/60 text-sm sm:text-base">
-            Такой страницы не существует — возможно, ссылка устарела
-            или страница была перемещена.
-          </p>
+        {/* Сообщение */}
+        <div className="mt-8 max-w-lg mx-auto space-y-4">
+          <p className="text-2xl font-semibold text-[var(--color-ink)]">Страница исчезла в космосе</p>
+          <p className="text-[var(--color-muted)]">Такой страницы не существует — возможно, она была перенесена в другой мир</p>
         </div>
 
-        {/* Actions */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+        {/* Кнопки */}
+        <div className="mt-12 flex flex-wrap justify-center gap-4">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-6 py-2.5 text-sm font-medium text-white transition hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+            className="inline-flex items-center justify-center text-center px-10  rounded-3xl bg-gradient-to-r from-[var(--color-accent)] to-[#C4A5FF] text-black font-semibold text-sm hover:scale-105 transition-transform"
           >
             На главную
           </Link>
-
           <Link
             to="/catalog"
-            className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-2.5 text-sm text-white/80 transition hover:border-white/30 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+            className="inline-flex items-center justify-center text-center px-10 py-4 rounded-3xl border border-white/20 text-white/90 hover:bg-white/5 transition-all"
           >
             В каталог
           </Link>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
