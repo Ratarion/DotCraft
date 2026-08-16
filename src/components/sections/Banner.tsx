@@ -6,7 +6,7 @@ export function Banner() {
     <section className="grid grid-cols-1 items-center gap-10 py-10 sm:py-14 md:grid-cols-2 md:gap-16">
       <div className="flex flex-col items-start gap-5">
         <p className="text-sm uppercase tracking-wide text-[var(--color-accent)]">
-          Цифровая мастерская
+          ВЕБ-СТУДИЯ
         </p>
         <h1 className="font-[var(--font-display)] text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
           Услуги, собранные с заботой о каждой детали

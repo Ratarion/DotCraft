@@ -33,7 +33,7 @@ export function Header() {
           className="flex items-center gap-2.5 rounded-sm font-[var(--font-display)] text-xl font-semibold tracking-tight focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
         >
           <img
-            src="/logo.jpg"
+            src="/logo.svg"
             alt="Dot&Craft"
             className="h-8 w-auto"
           />

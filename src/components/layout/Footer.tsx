@@ -10,13 +10,13 @@ export function Footer() {
             Dot&Craft
           </p>
           <p className="mt-2 max-w-xs text-sm text-[var(--color-ink)]/70">
-            Небольшая студия цифровых услуг: сообщества, сайты, брендинг и
+            Вуб-студия цифровых услуг: сообщества, сайты, брендинг и
             продвижение — аккуратно и в срок.
           </p>
         </div>
 
         <nav aria-label="Ссылки в подвале">
-          <p className="text-sm font-medium">Магазин</p>
+          <p className="text-sm font-medium">Навигация</p>
           <ul className="mt-3 flex flex-col gap-2 text-sm text-[var(--color-ink)]/70">
             <li>
               <Link
@@ -34,7 +34,32 @@ export function Footer() {
                 Корзина
               </Link>
             </li>
+            <li>
+              <Link
+                to="/contacts"
+                className="rounded-sm hover:text-[var(--color-ink)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+              >
+                Контакты
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/blog"
+                className="rounded-sm hover:text-[var(--color-ink)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+              >
+                Блог
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/abou"
+                className="rounded-sm hover:text-[var(--color-ink)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+              >
+                О компании
+              </Link>
+            </li>
           </ul>
+          
         </nav>
 
         <div>
